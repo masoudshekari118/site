@@ -1,0 +1,134 @@
+name: Sync with Upstream
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: v5
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Add upstream remote
+        run: |
+          git remote add upstream https://github.com/jackyzha0/quartz.git || true
+
+      - name: Fetch upstream
+        run: |
+          git fetch upstream v5
+
+      - name: Check for new commits
+        id: check
+        run: |
+          BEHIND=$(git rev-list --count HEAD..upstream/v5)
+          echo "behind=$BEHIND" >> $GITHUB_OUTPUT
+          if [ "$BEHIND" -gt 0 ]; then
+            echo "has_updates=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_updates=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Attempt merge
+        id: merge
+        if: steps.check.outputs.has_updates == 'true'
+        run: |
+          set +e
+          git merge upstream/v5 --no-edit --no-ff
+          if [ $? -ne 0 ]; then
+            echo "merge_failed=true" >> $GITHUB_OUTPUT
+            echo "conflict_files<<EOF" >> $GITHUB_OUTPUT
+            git diff --name-only --diff-filter=U >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+          set -e
+
+      - name: Push changes (if merge succeeded)
+        if: steps.check.outputs.has_updates == 'true' && steps.merge.outputs.merge_failed != 'true'
+        run: |
+          git push origin v5
+          echo "Successfully synced with upstream"
+
+      - name: Create issue for merge conflict
+        if: steps.merge.outputs.merge_failed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = '🔄 Sync Failed: Merge Conflicts with Upstream';
+            const conflictFiles = `${{ steps.merge.outputs.conflict_files }}`;
+            const body = `## Automatic sync failed
+
+            The daily sync with upstream (jackyzha0/quartz) failed due to merge conflicts.
+
+            ### Details
+            - **Date:** ${new Date().toISOString()}
+            - **Branch:** v5
+            - **Upstream Branch:** jackyzha0/quartz:v5
+
+            ### Files with conflicts
+            \`\`\`
+            ${conflictFiles}
+            \`\`\`
+
+            ### How to resolve
+            1. Pull the latest changes locally:
+               \`\`\`bash
+               git fetch upstream
+               git checkout v5
+               git merge upstream/v5
+               # Resolve conflicts manually (watch quartz.config.yaml, theme/, plugins/, custom.scss)
+               git add .
+               git commit -m "Merge upstream v5: resolved conflicts"
+               git push origin v5
+               \`\`\`
+            2. Or manually sync via GitHub's "Sync fork" button and resolve conflicts there.
+
+            ### Next Steps
+            - [ ] Resolve merge conflicts
+            - [ ] Push resolved changes
+            - [ ] Close this issue once sync is complete
+
+            ---
+            *This issue was automatically created by the sync workflow.*`;
+
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'sync-conflict'
+            });
+
+            const existingIssue = issues.data.find(issue => issue.title === title);
+
+            if (!existingIssue) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: title,
+                body: body,
+                labels: ['sync-conflict', 'automated']
+              });
+              console.log('Created issue for merge conflict');
+            } else {
+              console.log('Issue already exists:', existingIssue.html_url);
+            }
+
+      - name: Fail workflow if merge failed
+        if: steps.merge.outputs.merge_failed == 'true'
+        run: |
+          echo "Merge conflicts detected. Issue created."
+          exit 1
