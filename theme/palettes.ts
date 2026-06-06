@@ -416,4 +416,4 @@ export const colorPalettes = {
 // Available palettes: original, coolBlues, warmEarth, forestGreen, royalPurple, oceanicTeal, monochrome, vintageCream, devDark, oceanVibes, halloween, neon, sunset, persianAzure, sakuraDreams, cyberpunkCity, autumnGrove
 // type PaletteName = keyof typeof colorPalettes; // This line might cause issues with older TS
 
-export const currentPaletteName: keyof typeof colorPalettes = "persianAzure"
+export const currentPaletteName: keyof typeof colorPalettes = "oceanVibes"
