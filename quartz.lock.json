@@ -4,8 +4,8 @@
     "alias-redirects": {
       "source": "github:quartz-community/alias-redirects",
       "resolved": "https://github.com/quartz-community/alias-redirects.git",
-      "commit": "39231fd8a3b477ec7045b7df91898da9c919d134",
-      "installedAt": "2026-06-06T15:08:15.280Z"
+      "commit": "73a98dda7e4f55239310833299d91daf8611349f",
+      "installedAt": "2026-06-09T17:57:45.809Z"
     },
     "article-title": {
       "source": "github:quartz-community/article-title",
@@ -27,7 +27,7 @@
     },
     "bidi-text": {
       "source": "./plugins/bidi-text",
-      "resolved": "C:\\Users\\Almahdi Laptop\\Documents\\GitHub\\quartz\\plugins\\bidi-text",
+      "resolved": "C:/Users/Tetra-AI1/Documents/GitHub/quartz/plugins/bidi-text",
       "commit": "local",
       "installedAt": "2026-06-06T15:07:35.411Z"
     },
@@ -133,6 +133,12 @@
       "commit": "93304d22e1d7f09f93a33658ec273f7cb8d17793",
       "installedAt": "2026-06-06T15:09:35.974Z"
     },
+    "fonts": {
+      "source": "github:quartz-community/fonts",
+      "resolved": "https://github.com/quartz-community/fonts.git",
+      "commit": "8be5be706d19ca34fa8e342327b78e11aff3d4f0",
+      "installedAt": "2026-06-10T21:13:18.081Z"
+    },
     "footer": {
       "source": "github:quartz-community/footer",
       "resolved": "https://github.com/quartz-community/footer.git",
@@ -175,6 +181,12 @@
       "commit": "07eaca7b31a537c7c4a0fd2848b1f00014c940af",
       "installedAt": "2026-06-06T15:20:39.568Z"
     },
+    "obsidian-plugin-excalidraw": {
+      "source": "github:quartz-community/obsidian-plugin-excalidraw",
+      "resolved": "https://github.com/quartz-community/obsidian-plugin-excalidraw.git",
+      "commit": "dad0a4c0abdc8b3c2786277a2cbd67dc039c754c",
+      "installedAt": "2026-06-03T13:32:35.851Z"
+    },
     "og-image": {
       "source": "github:quartz-community/og-image",
       "resolved": "https://github.com/quartz-community/og-image.git",
@@ -191,7 +203,18 @@
       "source": "github:quartz-community/page-title",
       "resolved": "https://github.com/quartz-community/page-title.git",
       "commit": "a1c1fe0a9c6a5ce1acf6efa01d473a7d9850e2a3",
-      "installedAt": "2026-06-06T15:09:49.460Z"
+      "installedAt": "2026-06-03T13:32:36.002Z"
+    },
+    "quartz-themes": {
+      "source": {
+        "name": "quartz-themes",
+        "repo": "github:saberzero1/quartz-themes",
+        "subdir": "plugin"
+      },
+      "resolved": "https://github.com/saberzero1/quartz-themes.git",
+      "commit": "945135e8b70576753d0591e1713fe56553100b3d",
+      "subdir": "plugin",
+      "installedAt": "2026-06-11T15:50:25.576Z"
     },
     "reader-mode": {
       "source": "github:quartz-community/reader-mode",
