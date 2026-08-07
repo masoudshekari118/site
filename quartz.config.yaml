@@ -7,7 +7,7 @@ configuration:
   analytics:
     provider: plausible
   locale: fa-IR
-  baseUrl: quartz.jzhao.xyz
+  baseUrl: eledah.ir/quartz
   ignorePatterns:
     - private
     - templates
