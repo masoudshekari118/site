@@ -21,25 +21,25 @@ configuration:
       code: IBM Plex Mono
     colors:
       lightMode:
-        light: "#FAF0E6"
-        lightgray: "#F0E6D8"
-        gray: "#D8C8B8"
-        darkgray: "#B08D57"
-        dark: "#5C3A1A"
-        secondary: "#2A9D8F"
-        tertiary: "#DAA520"
-        highlight: rgba(42, 157, 143, 0.1)
-        textHighlight: rgba(42, 157, 143, 0.25)
+        light: "#faf8f8"
+        lightgray: "#e5e5e5"
+        gray: "#b8b8b8"
+        darkgray: "#4e4e4e"
+        dark: "#2b2b2b"
+        secondary: "#284b63"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#fff23688"
       darkMode:
-        light: "#08304A"
-        lightgray: "#001F33"
-        gray: "#307879"
-        darkgray: "#D8C8B8"
-        dark: "#FAF0E6"
-        secondary: "#FFD700"
-        tertiary: "#70CAD1"
-        highlight: rgba(255, 215, 0, 0.1)
-        textHighlight: rgba(255, 215, 0, 0.3)
+        light: "#161618"
+        lightgray: "#393639"
+        gray: "#646464"
+        darkgray: "#d4d4d4"
+        dark: "#ebebec"
+        secondary: "#7b97aa"
+        tertiary: "#84a59d"
+        highlight: rgba(143, 159, 169, 0.15)
+        textHighlight: "#b3aa0288"
 plugins:
   - source: "@quartz-community/created-modified-date"
     enabled: true
@@ -54,8 +54,8 @@ plugins:
     enabled: true
     options:
       theme:
-        light: github-light
-        dark: github-dark
+        light: catppuccin-latte
+        dark: catppuccin-mocha
       keepBackground: false
     order: 20
   - source: "@quartz-community/obsidian-flavored-markdown"
@@ -118,6 +118,19 @@ plugins:
   - source: "@quartz-community/roam"
     enabled: false
     order: 92
+  - source: "@quartz-community/quartz-fonts"
+    enabled: true
+    options:
+      useThemeFonts: false
+      fontOrigin: googleFonts
+      body: Vazirmatn
+      header: Vazirmatn
+      code: IBM Plex Mono
+  - source: "@quartz-themes/core"
+    enabled: true
+    options:
+      theme: catppuccin
+      mode: both
   - source: "@quartz-community/remove-draft"
     enabled: true
   - source: "@quartz-community/explicit-publish"
