@@ -125,6 +125,7 @@ plugins:
       fontOrigin: googleFonts
       body: Vazirmatn
       header: Vazirmatn
+      interface: Vazirmatn
       code: IBM Plex Mono
   - source: "@quartz-themes/core"
     enabled: true

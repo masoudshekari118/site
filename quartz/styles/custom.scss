@@ -1,7 +1,35 @@
 @use "./variables.scss" as *;
 
+$vazirmatn: Vazirmatn, sans-serif;
+
+:root {
+  // Things theme reads these overrides after quartz-fonts loads.
+  --font-text-override: #{$vazirmatn};
+  --font-interface-override: #{$vazirmatn};
+  --font-text-theme: #{$vazirmatn};
+  --font-interface-theme: #{$vazirmatn};
+}
+
 html {
-  font-family: Vazirmatn, sans-serif !important;
+  font-family: $vazirmatn !important;
+}
+
+body,
+.callout,
+.callout .callout-title-inner,
+.callout .callout-content,
+.search > .search-button,
+.search > .search-button > p,
+.search .search-bar,
+.search .search-bar::placeholder,
+.explorer,
+.explorer .nav-file-title,
+.explorer .nav-folder-title,
+.explorer .folder-title,
+.explorer .folder-button,
+.explorer .tree-item-self,
+.explorer-content {
+  font-family: var(--bodyFont, $vazirmatn) !important;
 }
 
 .breadcrumb-element p {
@@ -103,6 +131,23 @@ blockquote {
     span {
       color: inherit;
     }
+  }
+}
+
+.page article {
+  li.task-list-item,
+  li:has(> input[type="checkbox"]) {
+    list-style: none;
+    padding-inline-start: calc(var(--checkbox-size, 16px) + 0.75rem);
+    padding-inline-end: 0;
+  }
+
+  input[type="checkbox"] {
+    margin-inline-start: calc(-1 * var(--checkbox-size, 16px) - 0.5rem) !important;
+    margin-inline-end: 0.5rem !important;
+    margin-left: unset !important;
+    margin-right: unset !important;
+    vertical-align: middle;
   }
 }
 
