@@ -83,6 +83,29 @@ blockquote {
   transition: border-color 0.2s;
 }
 
+// Quartz Themes expect --callout-title-color; bridge from per-callout accent color.
+.callout {
+  --callout-title-color: var(--callout-color);
+
+  .callout-title-inner,
+  .callout-title-inner > p {
+    color: var(--callout-title-color, var(--callout-color, var(--text-normal, var(--darkgray))));
+  }
+
+  > .callout-content {
+    color: var(--text-normal, var(--darkgray));
+
+    p,
+    li,
+    ul,
+    ol,
+    a,
+    span {
+      color: inherit;
+    }
+  }
+}
+
 // Explorer RTL overrides (mobile)
 @media all and ($mobile) {
   html[dir="rtl"] .page > #quartz-body.lock-scroll > :not(.sidebar.left:has(.explorer)) {

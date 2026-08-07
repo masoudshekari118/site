@@ -54,8 +54,8 @@ plugins:
     enabled: true
     options:
       theme:
-        light: catppuccin-latte
-        dark: catppuccin-mocha
+        light: github-light
+        dark: github-dark
       keepBackground: false
     order: 20
   - source: "@quartz-community/obsidian-flavored-markdown"
@@ -129,7 +129,7 @@ plugins:
   - source: "@quartz-themes/core"
     enabled: true
     options:
-      theme: catppuccin
+      theme: things
       mode: both
   - source: "@quartz-community/remove-draft"
     enabled: true
